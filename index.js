@@ -7,9 +7,11 @@ const wss = new socket.Server({ server });
 
 wss.on("connection", (ws) => {
   ws.on("message", (data) => {
+    console.log("got message " + data);
     wss.clients.forEach((client) => {
       if (client !== ws && client.readyState === socket.OPEN) {
         client.send(data);
+        console.log("aand here " + data);
       }
     });
   });

@@ -1,15 +1,41 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const ChatBox = () => {
   const [message, setMessage] = useState("");
+  const [allMessages, setAllMessages] = useState([]);
+  const socket = useRef(null);
 
   useEffect(() => {
-    const ws = new WebSocket("wss://localhost:8080");
+    console.log("called");
+    socket.current = new WebSocket("ws://localhost:8080");
+    socket.current.onmessage = (msg) => {
+      msg.data
+        .text()
+        .then((txt) => setAllMessages((allMessages) => [...allMessages, txt]));
+    };
   }, []);
 
-  const handleSend = () => {};
+  useEffect(() => {
+    console.log(allMessages);
+  }, [allMessages]);
+
+  const handleSend = () => {
+    socket.current.send(message);
+    setMessage("");
+  };
+
+  const displayMessages = () => {
+    return allMessages.map((msg) => {
+      <p>message</p>;
+    });
+  };
   return (
     <div className="chatBox">
+      <div className="messageBox">
+        {allMessages.map((msg) => (
+          <p>{msg}</p>
+        ))}
+      </div>
       <input
         type="text"
         placeholder="chat here"

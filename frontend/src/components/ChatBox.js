@@ -22,7 +22,8 @@ const ChatBox = () => {
     setAllMessages((allMessages) => [...allMessages, msg]);
   };
 
-  const handleSend = () => {
+  const handleSend = (event) => {
+    event.preventDefault();
     socket.current.send(message);
     setChat(message);
     setMessage("");
@@ -35,13 +36,18 @@ const ChatBox = () => {
           <p>{msg}</p>
         ))}
       </div>
-      <input
-        type="text"
-        placeholder="chat here"
-        value={message}
-        onInput={(e) => setMessage(e.target.value)}
-      ></input>
-      <button onClick={() => handleSend()}></button>
+      <form onSubmit={handleSend}>
+        <label>
+          Your message:
+          <input
+            type="text"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+        </label>
+        <input type="submit" value="Send" />
+      </form>
+      ;
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import MessageBox from "./MessageBox";
 
 const ChatBox = () => {
   const [message, setMessage] = useState("");
@@ -31,11 +32,7 @@ const ChatBox = () => {
 
   return (
     <div className="chatBox">
-      <div className="messageBox">
-        {allMessages.map((msg) => (
-          <p>{msg}</p>
-        ))}
-      </div>
+      <MessageBox messages={allMessages} />
       <form onSubmit={handleSend}>
         <label>
           Your message:

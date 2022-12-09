@@ -7,28 +7,27 @@ const ChatBox = () => {
 
   useEffect(() => {
     console.log("called");
+    let ignore = false;
     socket.current = new WebSocket("ws://localhost:8080");
     socket.current.onmessage = (msg) => {
-      msg.data
-        .text()
-        .then((txt) => setAllMessages((allMessages) => [...allMessages, txt]));
+      msg.data.text().then((txt) => {
+        !ignore && setChat(txt);
+      });
     };
+
+    return () => (ignore = true);
   }, []);
 
-  useEffect(() => {
-    console.log(allMessages);
-  }, [allMessages]);
+  const setChat = (msg) => {
+    setAllMessages((allMessages) => [...allMessages, msg]);
+  };
 
   const handleSend = () => {
     socket.current.send(message);
+    setChat(message);
     setMessage("");
   };
 
-  const displayMessages = () => {
-    return allMessages.map((msg) => {
-      <p>message</p>;
-    });
-  };
   return (
     <div className="chatBox">
       <div className="messageBox">

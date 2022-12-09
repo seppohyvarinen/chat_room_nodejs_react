@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import MessageBox from "./MessageBox";
+import MessageBox from "./MessageBox/MessageBox";
 
 const ChatBox = () => {
   const [message, setMessage] = useState("");

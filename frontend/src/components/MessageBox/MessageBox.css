@@ -12,3 +12,11 @@
     rgba(0, 212, 255, 0.8120649651972158) 100%
   );
 }
+
+.clientMsg {
+  text-align: left;
+}
+
+.serverMsg {
+  text-align: right;
+}

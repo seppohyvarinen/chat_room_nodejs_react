@@ -12,21 +12,31 @@ const ChatBox = () => {
     socket.current = new WebSocket("ws://localhost:8080");
     socket.current.onmessage = (msg) => {
       msg.data.text().then((txt) => {
-        !ignore && setChat(txt);
+        !ignore && setChat(txt, "server");
       });
     };
 
     return () => (ignore = true);
   }, []);
 
-  const setChat = (msg) => {
-    setAllMessages((allMessages) => [...allMessages, msg]);
+  const setChat = (msg, keyword) => {
+    if (keyword === "client") {
+      setAllMessages((allMessages) => [
+        ...allMessages,
+        { message: msg, origin: "client" },
+      ]);
+    } else {
+      setAllMessages((allMessages) => [
+        ...allMessages,
+        { message: msg, origin: "server" },
+      ]);
+    }
   };
 
   const handleSend = (event) => {
     event.preventDefault();
     socket.current.send(message);
-    setChat(message);
+    setChat(message, "client");
     setMessage("");
   };
 

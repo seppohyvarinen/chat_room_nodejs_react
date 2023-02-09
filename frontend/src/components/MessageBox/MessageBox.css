@@ -1,7 +1,7 @@
 .messageBox {
   margin-left: auto;
   margin-right: auto;
-  width: 400px;
+  max-width: 800px;
   height: 400px;
   overflow: scroll;
   background: rgb(2, 0, 36);
@@ -13,10 +13,21 @@
   );
 }
 
+.messageBgClient {
+  display: flex;
+  align-self: flex-end;
+  max-width: 200px;
+  word-wrap: break-word;
+  background-color: aliceblue;
+}
+
+p {
+  padding: 10px;
+}
 .clientMsg {
-  text-align: left;
+  text-align: right;
 }
 
 .serverMsg {
-  text-align: right;
+  text-align: left;
 }

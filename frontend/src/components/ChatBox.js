@@ -7,7 +7,6 @@ const ChatBox = () => {
   const socket = useRef(null);
 
   useEffect(() => {
-    console.log("called");
     let ignore = false;
     socket.current = new WebSocket("ws://localhost:8080");
     socket.current.onmessage = (msg) => {
@@ -35,9 +34,12 @@ const ChatBox = () => {
 
   const handleSend = (event) => {
     event.preventDefault();
-    socket.current.send(message);
-    setChat(message, "client");
-    setMessage("");
+
+    if (message !== "") {
+      socket.current.send(message);
+      setChat(message, "client");
+      setMessage("");
+    }
   };
 
   return (

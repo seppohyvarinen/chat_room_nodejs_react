@@ -14,9 +14,13 @@ const MessageBox = ({ messages }) => {
     <div className="messageBox">
       {messages.map((msg) =>
         msg.origin === "client" ? (
-          <p className="clientMsg">{msg.message}</p>
+          <div className="messageBgClient">
+            <p className="clientMsg">{msg.message}</p>
+          </div>
         ) : (
-          <p className="serverMsg">{msg.message}</p>
+          <div className="messageBg">
+            <p className="serverMsg">{msg.message}</p>
+          </div>
         )
       )}
       <div ref={latestMsg} />

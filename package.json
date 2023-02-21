@@ -18,7 +18,7 @@
   "homepage": "https://github.com/seppohyvarinen/chat_room_nodejs_react#readme",
   "dependencies": {
     "express": "^4.18.2",
-    "socket.io": "^4.6.0",
+    "socket.io": "^4.6.1",
     "ws": "^8.11.0"
   }
 }
